@@ -1,0 +1,73 @@
+---
+title: "humana_initaial_data"
+author: "Camilla Bendetti"
+date: "9/18/2020"
+output: html_document
+---
+
+# Step 1: Process the data
+```{r include=FALSE, message=FALSE}
+library(dplyr)
+library(rpart)
+library(ggplot2)
+library(caret)
+library(fivethirtyeight)
+library(DataExplorer)
+library(descriptr)
+```
+
+```{r}
+transport <- read.csv("/Users/camillabendetti/Desktop/University\ of\ Maryland/Humana\ Case\ Competition/Download/2020_Competition_Training.csv")
+holdout <- read.csv("/Users/camillabendetti/Desktop/University\ of\ Maryland/Humana\ Case\ Competition/Download/2020_Competition_Holdout.csv")
+```
+
+```{r}
+transport1 <- within(transport, {
+  transportation_issues <- factor(transportation_issues, levels  = c(0,1), labels = c("No","Yes"))
+  cons_cmys <- factor(cons_cmys, levels = c(0,1,2,3,4,5,6,7,8,9), labels = c("Uncoded", "Less than 9th grade", "Less than 12th grade", "High School Diploma", "Some College", "Associate Degree", "Bachelor's Degree", "Graduate Degree", "Professional School Degree","Doctorate Degree"))
+  #Cons_HOMSTAT <- factor(transportation_issues, levels  = c(0,1), labels = c("No","Yes"))
+  })
+```
+
+```{r}
+transport1 <- within(transport, {
+  transportation_issues <- factor(transportation_issues, levels  = c(0,1), labels = c("No","Yes"))
+  cons_cmys <- factor(cons_cmys, levels = c(0,1,2,3,4,5,6,7,8,9), labels = c("Uncoded", "Less than 9th grade", "Less than 12th grade", "High School Diploma", "Some College", "Associate Degree", "Bachelor's Degree", "Graduate Degree", "Professional School Degree","Doctorate Degree"))
+
+  })
+```
+```{r}
+src_platform_cd_dummies = model.matrix(~src_platform_cd + 0, data = transport)
+sex_cd_dummies = model.matrix(~sex_cd + 0, data = transport)
+smoker_current_ind_dummies = model.matrix(~smoker_current_ind + 0, data = transport)
+smoker_former_ind_dummies = model.matrix(~smoker_former_ind + 0, data = transport)
+
+transport_dummies = data.frame(transport, src_platform_cd_dummies, sex_cd_dummies, smoker_current_ind_dummies, smoker_former_ind_dummies)
+
+
+
+rg2 = lm(formula = transportation_issues ~ est_age + src_platform_cdLV + sex_cdM, data = transport_dummies)
+summary(rg2)
+rg2
+```
+
+
+```{r}
+#separate the data into quantitative (continuous) and categorical (discrete) 
+```
+
+```{r}
+plot_str(transport)
+```
+
+```{r}
+plot_density(transport)
+```
+
+```{r}
+missing_values <- ds_screener(transport)
+missing_values
+
+```
+
+

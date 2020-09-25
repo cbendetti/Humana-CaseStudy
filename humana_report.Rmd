@@ -1,0 +1,36 @@
+---
+title: "Humana Transportation Challenge"
+author: "Akshata Kishore Moharir, Camilla Fiore Bendetti, Diya Datta"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document: default
+  pdf_document: default
+#bibliography: "Library.bib"
+abstract: The goal of this challenge is to create an effective predictive model to identify which Medicare members struggle to find transportation when they are in need of medical care. In this report, we will explore how to predict and address this transportation problem. Our goal is to identify the variables that have the highest impact on transportaion issues in order to propose solutions for those facing transportation restrictions.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+
+## Methods
+
+First, we preformed a missing value analysis using ds_screener from the 'descriptr' package. From this analysis we found that there are 450754 missing values from the data set. However, overall that only accounts for 0.78% of the data. Therefore, we determined that the quality of the data is very good. We used this method to filter out the rows with missing data and reduce the number of variables for further analysis.
+
+**Go back and determine the appropriate way to remove these columns because some on these are only missing a few rows which could still mean they are significant compared to the column that is missing 98% of its data 
+
+
+## Results
+
+
+
+## Conclusions
+
+
+## Acknowledgements
+
+
+## References
